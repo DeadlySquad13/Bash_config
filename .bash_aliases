@@ -17,6 +17,9 @@ alias psh='powershell.exe';
 
 # NeoVim.
 alias vi='nvim';
+alias gvi='neovide';
+
+alias hs='historySearch';
 
 # Open (for wsl).
 # alias open='cmd.exe /C start';
