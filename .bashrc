@@ -156,7 +156,7 @@ WIN_PATH_BACKUP="/mnt/e/soft/ConEmu/ConEmu/Scripts:/mnt/e/soft/ConEmu:/mnt/e/sof
 # For clipping and pasting.
 WIN_PATH="/mnt/c/ProgramData/WslProgramData:$WIN_HOME/im-select";
 # export PATH="/usr/local/opt/node@16/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.npm-global/bin:$HOME/.local/bin:$HOME/go/bin:/usr/local/go/bin:/Applications/FVim.app/Contents/MacOS:/mnt/c/ProgramData/Microsoft/Windows/Start Menu/Programs:/mnt/c/Program Files (x86)/XYplorer:$WIN_PATH";
-export PATH="$PATH:/home/ds13/.local/bin"
+export PATH+="$HOME/.local/bin"
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
@@ -270,7 +270,9 @@ if [ "${unameOut}" == "Darwin" ]; then
     ssh-add --apple-use-keychain
     ssh-add --apple-load-keychain
 elif [ "$(expr substr ${unameOut} 1 5)" == "Linux" ]; then
+    # TODO: Rename it on MacOs to Personal__DeadlySquad13_gitHub
     ssh-add ~/.ssh/DeadlySquad13_gitHub_rsa
+    ssh-add ~/.ssh/Personal__DeadlySquad13_gitHub
 fi
 
 # Templates.
