@@ -30,22 +30,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# Startup.
-# Check if:
-#   1. tmux exists on the system,
-#   2. we're in an interactive shell,
-#   3. tmux doesn't try to run within itself.
-# if command -v tmux &> /dev/null \
-#   && [ -n "$PS1" ] \
-#   && [[ ! "$TERM" =~ screen ]] \
-#   && [[ ! "$TERM" =~ tmux ]] \
-#   && [ -z "$TMUX" ];
-# then
-#   tmux attach -t main || tmux new -s main
+# Always start new interactive bash session in tmux.
+# if [ -f ~/.bash/startupInTmux.sh ]; then
+#     . ~/.bash/startupInTmux.sh
 # fi
-
-# Enable ssh authentication agent (for ssh-add).
-#eval `ssh-agent -s`
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -260,7 +248,7 @@ if [ -f ~/.bash/_utilities/main.sh ]; then
   . ~/.bash/_utilities/main.sh
 fi
 
-# MacOs specific.
+# MacOs specific settings.
 if [ -f ~/.bash/.bash_macos ]; then
   . ~/.bash/.bash_macos
 fi
@@ -279,48 +267,20 @@ elif [ "$(expr substr ${unameOut} 1 5)" == "Linux" ]; then
 fi
 
 # Templates.
-export TEMPLATE_PATH="/mnt/e/Projects/--personal/ModuleT/src";
-createModuleThmoon() {
-  local componentName=$1;
-  local moduleName='thmoon';
+if [ -f ~/.bash/templates.sh ]; then
+    export TEMPLATE_PATH="/mnt/e/Projects/--personal/ModuleT/src";
 
-  mkdir $componentName;
-
-  tpage --define Component=$componentName \
-  $TEMPLATE_PATH/$moduleName/Component.tsx >> \
-  $componentName/$componentName.tsx;
-
-  tpage --define Component=$componentName \
-  $TEMPLATE_PATH/$moduleName/Component.types.ts >> \
-  $componentName/$componentName.types.ts;
-
-  tpage $TEMPLATE_PATH/$moduleName/Component.module.css >> \
-  $componentName/$componentName.module.css
-}
+    . ~/.bash/templates.sh
+fi
 
 # Taskwarrior project management.
-# Declares an array of projects in bash
-# The position in the array counts for the id and starts counting at 1
-declare -a projects=('Thmoon.OG.P' 'Lessons');
+if [ -f ~/.bash/taskwarriorProjectManagement.sh ]; then
+    # Declares an array of projects in bash
+    # The position in the array counts for the id and starts counting at 1
+    declare -a projects=('Thmoon.OG.P' 'Lessons');
 
-# http://stackoverflow.com/a/16553351
-# get length of an array
-nrOfProjects=${#projects[@]}
-urgencyPrio=4
-
-#echo "Setting up TaskWarrior and TimeWarrior with ${nrOfProjects} projects..."
-#echo "DONE = $DONE / URGENT = $URGENT / OVERDUE = $OVERDUE / DUETODAY = $DUETODAY  / DUETOMORROW = $DUETOMORROW"
-
-# Loop will set up task next, task add, task log and timew start for all projects listed above
-for (( i = 0; i < $nrOfProjects; i++ ));
-do
-  #echo "Project $i = ${projects[i]}"
-  #alias tn$i="task next project:${projects[i]} +READY"
-  #alias tnu$i="tn${i} urgency \> ${urgencyPrio}"
-  alias ta$i="task add project:${projects[i]}"
-  #alias tl$i="task log project:${projects[i]}"
-  #alias twst$i="timew start ${projects[i]}"
-done;
+    . ~/.bash/taskwarriorProjectManagement.sh
+fi
 
 # Searching.
 # Fzf.
