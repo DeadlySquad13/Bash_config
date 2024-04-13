@@ -118,8 +118,10 @@ rgvi() {
     rg --vimgrep "$1" | nvim -c ':cbuffer'
 }
 
-# Alsa's speaker-test.
+# Linux aliases.
+# # Alsa aliases.
 if [ -x /usr/bin/alsamixer ]; then
+    # Alsa's speaker-test.
     #   Play human voice pronouncing channel names one by one instead of pink
     # noise.
     alias speaker-test="speaker-test -t wav -c 6";
