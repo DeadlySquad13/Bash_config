@@ -307,6 +307,10 @@ if type fzf &> /dev/null; then
 
   export FZF_DEFAULT_OPTS
 
+  smug_start_with_fzf() {
+      smug start $(smug list | fzf --preview "bat --color=always --style=plain --line-range :300 $HOME/.config/smug/{}.yml")
+  }
+
   #open_with_fzf() {
       #fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
   #}
