@@ -229,6 +229,16 @@ historySearch() {
 }
 alias hs='historySearch';
 
+# Download git ignore.
+function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+# Show names of the keys pressed.
+function print-keys() {
+    if [ -x /usr/bin/xev ]; then
+        xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+    fi
+}
+
 # Powerline.
 if [ -f `which powerline-daemon` ]; then
     powerline-daemon -q
@@ -346,9 +356,6 @@ if type fzf &> /dev/null; then
       #sudo pacman -Syy $(pacman -Ssq | fzf -m --preview="pacman -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
   #}
 fi
-
-# Download git ignore.
-function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 source "$HOME/.cargo/env"
 
