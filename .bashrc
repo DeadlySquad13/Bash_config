@@ -260,19 +260,9 @@ if [ -f ~/.bash/.bash_macos ]; then
   . ~/.bash/.bash_macos
 fi
 
-# Authorize ssh (https://stackoverflow.com/a/10032655).
-eval $(ssh-agent)
-
-# Depends on system [chech current system in bash](https://stackoverflow.com/a/17072017).
-unameOut="$(uname -s)"
-if [ "${unameOut}" == "Darwin" ]; then
-    # May need on first start.
-    ssh-add --apple-use-keychain
-    ssh-add --apple-load-keychain
-elif [ "$(expr substr ${unameOut} 1 5)" == "Linux" ]; then
-    # TODO: Rename it on MacOs to Personal__DeadlySquad13_gitHub
-    ssh-add ~/.ssh/DeadlySquad13_gitHub_rsa
-    ssh-add ~/.ssh/Personal__DeadlySquad13_gitHub
+# Authorize ssh 
+if [ -f ~/.bash/sshAuthorization.sh ]; then
+  . ~/.bash/sshAuthorization.sh
 fi
 
 # Templates.
