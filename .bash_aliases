@@ -17,6 +17,9 @@ alias psh='powershell.exe';
 
 # NeoVim.
 alias vi='nvim';
+alias gvi='neovide';
+
+alias hs='historySearch';
 
 # Open (for wsl).
 # alias open='cmd.exe /C start';
@@ -132,3 +135,6 @@ if [ -x /usr/bin/awesome ]; then
     # Test awesome with separate X-server instance via Xephyr.
     alias xephyr-awesome="Xephyr -screen 800x600 :5 & sleep 1 ; DISPLAY=:5 awesome"
 fi
+# Network.
+# Source: https://stackoverflow.com/a/13322549
+alias lanip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"

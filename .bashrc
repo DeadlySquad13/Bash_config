@@ -30,22 +30,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# Startup.
-# Check if:
-#   1. tmux exists on the system,
-#   2. we're in an interactive shell,
-#   3. tmux doesn't try to run within itself.
-# if command -v tmux &> /dev/null \
-#   && [ -n "$PS1" ] \
-#   && [[ ! "$TERM" =~ screen ]] \
-#   && [[ ! "$TERM" =~ tmux ]] \
-#   && [ -z "$TMUX" ];
-# then
-#   tmux attach -t main || tmux new -s main
+# Always start new interactive bash session in tmux.
+# if [ -f ~/.bash/startupInTmux.sh ]; then
+#     . ~/.bash/startupInTmux.sh
 # fi
-
-# Enable ssh authentication agent (for ssh-add).
-#eval `ssh-agent -s`
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -155,8 +143,16 @@ export NPM_CONFIG_PREFIX=~/.npm-global
 WIN_PATH_BACKUP="/mnt/e/soft/ConEmu/ConEmu/Scripts:/mnt/e/soft/ConEmu:/mnt/e/soft/ConEmu/ConEmu:/mnt/c/Users/Александр/AppData/Local/Programs/Python/Python38/Scripts/:/mnt/c/Users/Александр/AppData/Local/Programs/Python/Python38/:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/ffmpeg/bin:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Razer Chroma SDK/bin:/mnt/c/Program Files/Razer Chroma SDK/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/e/TORRENT/Minecraft/WorldPainter:/mnt/e/Lessons/Informatics/Python:/mnt/e/Lessons/Informatics/Python Projects:/mnt/c/ProgramData/chocolatey/bin:/mnt/e/soft/php:/mnt/e/soft/Calibre (Editing Epub files/:/mnt/c/Program Files/MySQL/MySQL Utilities 1.6/:/mnt/c/Program Files/Microsoft/Web Platform Installer/:/mnt/c/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/:/mnt/c/Program Files/Microsoft SQL Server/110/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/120/Tools/Binn/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/e/soft/Node.js/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/IncrediBuild:/mnt/e/soft/Graphics Editors/QuickTime/QTSystem/:/mnt/e/soft/Git for Windows/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Users/Александр/.windows-build-tools/python27/:/mnt/e/soft/JetBrains/JetBrains PyCharm Professional/JetBrains PyCharm Professional 2019.2.4/bin:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/VC/Tools/MSVC/14.25.28610/bin/HostX86/x86:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/Common7/IDE/VC/VCPackages:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/Common7/IDE/CommonExtensions/Microsoft/TestWindow:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/MSBuild/Current/bin/Roslyn:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/Team Tools/Performance Tools:/mnt/c/Program Files (x86)/Microsoft Visual Studio/Shared/Common/VSPerfCollectionTools/vs2019/:/mnt/c/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x86:/mnt/c/Program Files (x86)/Windows Kits/10/bin/x86:/mnt/e/soft/Visual Studio Code/VIsual Studio Code 2019/MSBuild/Current/Bin:/mnt/c/Windows/Microsoft.NET/Framework/v4.0.30319:/mnt/e/soft/Visual St:/mnt/c/Users/Александр/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/e/Scripts/Batch/Lessons:/mnt/c/Users/Александр/AppData/Local/atom-nightly/bin:/mnt/c/Users/Александр/.npm-global/bin"
 # For clipping and pasting.
 WIN_PATH="/mnt/c/ProgramData/WslProgramData:$WIN_HOME/im-select";
-# export PATH="/usr/local/opt/node@16/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.npm-global/bin:$HOME/.local/bin:$HOME/go/bin:/usr/local/go/bin:/Applications/FVim.app/Contents/MacOS:/mnt/c/ProgramData/Microsoft/Windows/Start Menu/Programs:/mnt/c/Program Files (x86)/XYplorer:$WIN_PATH";
-export PATH+="$HOME/.local/bin"
+# This path was enough on salt@ArchLinux TODO: Clean macos paths.
+# export PATH+="$HOME/.local/bin"
+# Was needed during wsl operation, not sure if it still viable.
+# WIN_PROGRAMS="/mnt/c/ProgramData/Microsoft/Windows/Start Menu/Programs:/mnt/c/Program Files (x86)/XYplorer"
+GO_PATH="$HOME/go/bin:/usr/local/go/bin"
+NODE_PATH="/usr/local/opt/node@16/bin"
+# Because I'm done dealing with nix paths... They're overwritten somewhere in
+# .bashrc.
+export NIX_PATH="$HOME/.local/bin:$HOME.nix-profile/bin:/nix/var/nix/profiles/default/bin"
+export PATH+="$NIX_PATH:$NODE_PATH:$GO_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.npm-global/bin:$HOME/.local/bin:$WIN_PATH";
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
@@ -227,10 +223,6 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 historySearch() {
   ls -rt $HISTPATH/*.log | xargs rg "$1";
 }
-alias hs='historySearch';
-
-# Download git ignore.
-function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}
 
 # Show names of the keys pressed.
 function print-keys() {
@@ -265,7 +257,7 @@ if [ -f ~/.bash/_utilities/main.sh ]; then
   . ~/.bash/_utilities/main.sh
 fi
 
-# MacOs specific.
+# MacOs specific settings.
 if [ -f ~/.bash/.bash_macos ]; then
   . ~/.bash/.bash_macos
 fi
@@ -276,48 +268,20 @@ if [ -f ~/.bash/sshAuthorization.sh ]; then
 fi
 
 # Templates.
-export TEMPLATE_PATH="/mnt/e/Projects/--personal/ModuleT/src";
-createModuleThmoon() {
-  local componentName=$1;
-  local moduleName='thmoon';
+if [ -f ~/.bash/templates.sh ]; then
+    export TEMPLATE_PATH="/mnt/e/Projects/--personal/ModuleT/src";
 
-  mkdir $componentName;
-
-  tpage --define Component=$componentName \
-  $TEMPLATE_PATH/$moduleName/Component.tsx >> \
-  $componentName/$componentName.tsx;
-
-  tpage --define Component=$componentName \
-  $TEMPLATE_PATH/$moduleName/Component.types.ts >> \
-  $componentName/$componentName.types.ts;
-
-  tpage $TEMPLATE_PATH/$moduleName/Component.module.css >> \
-  $componentName/$componentName.module.css
-}
+    . ~/.bash/templates.sh
+fi
 
 # Taskwarrior project management.
-# Declares an array of projects in bash
-# The position in the array counts for the id and starts counting at 1
-declare -a projects=('Thmoon.OG.P' 'Lessons');
+if [ -f ~/.bash/taskwarriorProjectManagement.sh ]; then
+    # Declares an array of projects in bash
+    # The position in the array counts for the id and starts counting at 1
+    declare -a projects=('Thmoon.OG.P' 'Lessons');
 
-# http://stackoverflow.com/a/16553351
-# get length of an array
-nrOfProjects=${#projects[@]}
-urgencyPrio=4
-
-#echo "Setting up TaskWarrior and TimeWarrior with ${nrOfProjects} projects..."
-#echo "DONE = $DONE / URGENT = $URGENT / OVERDUE = $OVERDUE / DUETODAY = $DUETODAY  / DUETOMORROW = $DUETOMORROW"
-
-# Loop will set up task next, task add, task log and timew start for all projects listed above
-for (( i = 0; i < $nrOfProjects; i++ ));
-do
-  #echo "Project $i = ${projects[i]}"
-  #alias tn$i="task next project:${projects[i]} +READY"
-  #alias tnu$i="tn${i} urgency \> ${urgencyPrio}"
-  alias ta$i="task add project:${projects[i]}"
-  #alias tl$i="task log project:${projects[i]}"
-  #alias twst$i="timew start ${projects[i]}"
-done;
+    . ~/.bash/taskwarriorProjectManagement.sh
+fi
 
 # Searching.
 # Fzf.
@@ -344,6 +308,10 @@ if type fzf &> /dev/null; then
 
   export FZF_DEFAULT_OPTS
 
+  smug_start_with_fzf() {
+      smug start $(smug list | fzf --preview "bat --color=always --style=plain --line-range :300 $HOME/.config/smug/{}.yml")
+  }
+
   #open_with_fzf() {
       #fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
   #}
@@ -357,7 +325,8 @@ if type fzf &> /dev/null; then
   #}
 fi
 
-source "$HOME/.cargo/env"
+# TODO: Rust env setup (breaks? nix paths)
+# source "$HOME/.cargo/env"
 
 # asdf version manager.
 # When new node version comes out and you’ll update to it by running brew
@@ -371,10 +340,11 @@ source "$HOME/.cargo/env"
 # Set colors to match iTerm2 Terminal Colors
 # export TERM=xterm-256color
 
-. "/usr/local/opt/asdf/libexec/asdf.sh"
+# . "/usr/local/opt/asdf/libexec/asdf.sh"
 
-. "/usr/local/opt/asdf/libexec/asdf.sh"
+# . "/usr/local/opt/asdf/libexec/asdf.sh"
 
-export NODE_OPTIONS=--openssl-legacy-provider
+# TODO: Seems like it's not needed anymore, remove after 2024-06-01.
+# export NODE_OPTIONS=--openssl-legacy-provider
 
 source /Users/aspakalo/.config/broot/launcher/bash/br
