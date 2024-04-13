@@ -124,3 +124,9 @@ if [ -x /usr/bin/alsamixer ]; then
     # noise.
     alias speaker-test="speaker-test -t wav -c 6";
 fi
+
+# # Awesome aliases.
+if [ -x /usr/bin/awesome ]; then
+    # Test awesome with separate X-server instance via Xephyr.
+    alias xephyr-awesome="Xephyr -screen 800x600 :5 & sleep 1 ; DISPLAY=:5 awesome"
+fi
