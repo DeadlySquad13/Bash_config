@@ -125,12 +125,20 @@ rgvi() {
 alias brc='br --cmd c/'
 
 # Alsa's speaker-test.
+# Linux aliases.
+# # Alsa aliases.
 if [ -x /usr/bin/alsamixer ]; then
+    # Alsa's speaker-test.
     #   Play human voice pronouncing channel names one by one instead of pink
     # noise.
     alias speaker-test="speaker-test -t wav -c 6";
 fi
 
+# # Awesome aliases.
+if [ -x /usr/bin/awesome ]; then
+    # Test awesome with separate X-server instance via Xephyr.
+    alias xephyr-awesome="Xephyr -screen 800x600 :5 & sleep 1 ; DISPLAY=:5 awesome"
+fi
 # Network.
 # Source: https://stackoverflow.com/a/13322549
 alias lanip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
