@@ -43,7 +43,7 @@ alias lg='lazygit';
 # Python.
 alias py='python';
 # alias py='python3.10';
-# alias python='python3.10';
+alias python='python3';
 #alias pip='pip3';
 # * Venv.
 alias venv='python -m venv';
@@ -120,6 +120,9 @@ alias rgf='rg --files | rg'
 rgvi() {
     rg --vimgrep "$1" | nvim -c ':cbuffer'
 }
+
+# Search file-contents with broot.
+alias brc='br --cmd c/'
 
 # Alsa's speaker-test.
 if [ -x /usr/bin/alsamixer ]; then
