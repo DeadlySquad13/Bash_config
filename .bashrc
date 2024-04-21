@@ -346,5 +346,3 @@ fi
 
 # TODO: Seems like it's not needed anymore, remove after 2024-06-01.
 # export NODE_OPTIONS=--openssl-legacy-provider
-
-source /Users/aspakalo/.config/broot/launcher/bash/br
