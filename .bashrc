@@ -23,15 +23,15 @@ shopt -s checkwinsize
 # export LC_ALL="en_US.UTF-8"
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # Always start new interactive bash session in tmux.
-# if [ -f ~/.bash/startupInTmux.sh ]; then
+# if [[ -f ~/.bash/startupInTmux.sh ]]; then
 #     . ~/.bash/startupInTmux.sh
 # fi
 
@@ -45,8 +45,8 @@ esac
 # should be on the output of commands, not on the prompt
 force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [[ -n "$force_color_prompt" ]]; then
+    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
@@ -56,7 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [[ "$color_prompt" = yes ]]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -72,7 +72,7 @@ xterm*|rxvt*)
     ;;
 esac
 # Ranger shell prompt indicator.
-if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
+if [[ -n "$RANGER_LEVEL" ]]; then export PS1="[ranger]$PS1"; fi
 
 # OLD:
 #LS_COLORS="rs=0:di=1;33;44:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
@@ -85,7 +85,7 @@ if [ -n "$RANGER_LEVEL" ]; then export PS1="[ranger]$PS1"; fi
 # Alias definitions.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash/.bash_aliases ]; then
+if [[ -f ~/.bash/.bash_aliases ]]; then
     . ~/.bash/.bash_aliases
 fi
 
@@ -132,9 +132,9 @@ export LS_COLORS
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
+  elif [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion
   fi
 fi
@@ -192,7 +192,7 @@ wrongParameters=2
 
 # Config.
 # * Completion.
-if [[  $PS1 && -f /usr/share/bash-completion/bash_completion ]]; then
+if [[  "$PS1" && -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
 fi
 
@@ -202,7 +202,7 @@ mkdir -p "$HOME/.log/BashHistory"
 export HISTPATH="$HOME/.log/BashHistory";
 # - Saving history to file
 export PROMPT_COMMAND='\
-  if [ "$(id -u)" -ne 0 ]; then\
+  if [[ "$(id -u)" -ne 0 ]]; then\
     echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >>\
     ${HISTPATH}/BashHistory{$(date "+%Y-%m-%d")}.log;\
   fi';
@@ -226,25 +226,25 @@ historySearch() {
 
 # Show names of the keys pressed.
 function print-keys() {
-    if [ -x /usr/bin/xev ]; then
+    if [[ -x /usr/bin/xev ]]; then
         xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
     fi
 }
 
 # Powerline.
-if [ -f `which powerline-daemon` ]; then
+if [[ -f `which powerline-daemon` ]]; then
     powerline-daemon -q
     POWERLINE_BASH_CONTINUATION=1
     POWERLINE_BASH_SELECT=1
 fi
 # How to make it more generic?
 # - WSL.
-if [ -f /home/dubuntus/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh ]; then
+if [[ -f /home/dubuntus/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh ]]; then
     source /home/dubuntus/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
     #source /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh
 fi
 # - MacOs.
-if [ -f /usr/local/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh ]; then
+if [[ -f /usr/local/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh ]]; then
     source /usr/local/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
@@ -253,29 +253,29 @@ stty susp undef
 bind -x '"\C-z":"fg"'
 
 # Utilities.
-if [ -f ~/.bash/_utilities/main.sh ]; then
+if [[ -f ~/.bash/_utilities/main.sh ]]; then
   . ~/.bash/_utilities/main.sh
 fi
 
 # MacOs specific settings.
-if [ -f ~/.bash/.bash_macos ]; then
+if [[ -f ~/.bash/.bash_macos ]]; then
   . ~/.bash/.bash_macos
 fi
 
 # Authorize ssh 
-if [ -f ~/.bash/sshAuthorization.sh ]; then
+if [[ -f ~/.bash/sshAuthorization.sh ]]; then
   . ~/.bash/sshAuthorization.sh
 fi
 
 # Templates.
-if [ -f ~/.bash/templates.sh ]; then
+if [[ -f ~/.bash/templates.sh ]]; then
     export TEMPLATE_PATH="/mnt/e/Projects/--personal/ModuleT/src";
 
     . ~/.bash/templates.sh
 fi
 
 # Taskwarrior project management.
-if [ -f ~/.bash/taskwarriorProjectManagement.sh ]; then
+if [[ -f ~/.bash/taskwarriorProjectManagement.sh ]]; then
     # Declares an array of projects in bash
     # The position in the array counts for the id and starts counting at 1
     declare -a projects=('Thmoon.OG.P' 'Lessons');
@@ -287,7 +287,7 @@ fi
 # Fzf.
 if type fzf &> /dev/null; then
   # * Setting autocompletion and default keybindings.
-  if [ -f ~/.fzf.bash ]; then
+  if [[ -f ~/.fzf.bash ]]; then
     source ~/.fzf.bash
   fi
 
@@ -302,7 +302,7 @@ if type fzf &> /dev/null; then
   FZF_DEFAULT_OPTS='--bind=ctrl-f:preview-half-page-down,ctrl-b:preview-half-page-up '
 
   # * Bat preview.
-  if [ -f /usr/local/bin/bat ]; then
+  if [[ -f /usr/local/bin/bat ]]; then
     FZF_DEFAULT_OPTS+="--preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}' "
   fi
 

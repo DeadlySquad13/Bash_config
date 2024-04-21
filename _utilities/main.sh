@@ -79,7 +79,7 @@ config() {
 bash() {
   local parameters="$@";
   config ~/.bashrc $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command bash $parameters;
   fi
 }
@@ -87,7 +87,7 @@ bash() {
 task() {
   local parameters="$@";
   config ~/.taskrc $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command task $parameters;
   fi
 }
@@ -95,7 +95,7 @@ task() {
 tmux() {
   local parameters="$@";
   config ~/.tmux.conf $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command tmux $parameters;
   fi
 }
@@ -121,7 +121,7 @@ rangerWithFollow() {
 ranger() {
   local parameters="$@";
   config ~/.config/ranger/rc.conf $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     rangerWithFollow $parameters;
   fi
 }
@@ -129,7 +129,7 @@ ranger() {
 rg() {
   local parameters="$@";
   config $RIPGREP_CONFIG_PATH $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command rg $parameters;
   fi
 }
@@ -138,7 +138,7 @@ ssh() {
   local parameters="$@";
   # System config, there's also user config.
   config "/etc/ssh/ssh_config" $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command ssh $parameters;
   fi
 }
@@ -149,7 +149,7 @@ export GOTO_CONFIG_PATH="$HOME/.config/goto";
 Goto() {
   local parameters="$@";
   config $GOTO_CONFIG_PATH $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     goto $parameters;
   fi
 }
@@ -159,7 +159,7 @@ lazygit() {
   local parameters="$@";
   # System config, there's also user config.
   config $LAZYGIT_CONFIG_PATH $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command lazygit $parameters;
   fi
 }
@@ -168,7 +168,7 @@ export KITTY_CONFIG_PATH="$HOME/.config/kitty/kitty.conf";
 kitty() {
   local parameters="$@";
   config $KITTY_CONFIG_PATH $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command kitty $parameters;
   fi
 }
@@ -177,7 +177,7 @@ export ALACRITTY_CONFIG_PATH="$HOME/.config/alacritty/alacritty.yml";
 alacritty() {
   local parameters="$@";
   config $ALACRITTY_CONFIG_PATH $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command alacritty $parameters;
   fi
 }
@@ -191,7 +191,7 @@ fi
 wezterm() {
   local parameters="$@";
   config "$WEZTERM_CONFIG_PATH" $parameters;
-  if [ $? -eq 1 ]; then
+  if [[ $? -eq 1 ]]; then
     command wezterm $parameters;
   fi
 }
@@ -218,7 +218,7 @@ if isWsl; then
   wsl() {
     local parameters="$@";
     config $WIN_HOME/.wslconfig $parameters;
-    if [ $? -eq 1 ]; then
+    if [[ $? -eq 1 ]]; then
       command wsl $parameters;
     fi
   }
@@ -226,7 +226,7 @@ if isWsl; then
   wsltty() {
     local parameters="$@";
     config $WIN_LOCALAPPDATA/wsltty/home/$WIN_USER/.minttyrc $parameters;
-    if [ $? -eq 1 ]; then
+    if [[ $? -eq 1 ]]; then
       command wsltty $parameters;
     fi
   }
@@ -244,7 +244,7 @@ dotPng() {
 smug() {
   local command="$1";
   local parameters="$@";
-  if [ "$command" = "start" ]; then
+  if [[ "$command" = "start" ]]; then
     command smug $parameters --attach;
   else
     command smug $parameters;
