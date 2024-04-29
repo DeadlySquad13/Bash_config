@@ -216,8 +216,9 @@ export HISTTIMEFORMAT="%d/%m/%y %T  "
 export HISTCONTROL=ignoredups:erasedups  
 # - When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
-# - After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+# - After each command, append to the history file (removed: and reread it
+# `; history -c; history -r`)
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 
 # First argument is a command to search
 historySearch() {
