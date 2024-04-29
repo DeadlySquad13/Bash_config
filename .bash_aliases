@@ -158,5 +158,35 @@ if [[ -r /usr/share/bash-completion/completions/systemctl ]]; then
   # FIX: Work ok but for some reason 'complete' is not found so it errors on
   # last line of the script. Even though it should be
   # bundled with bash.
-  . /usr/share/bash-completion/completions/systemctl && complete -F _systemctl systemctl systemctlWrapper sct
+  (. /usr/share/bash-completion/completions/systemctl || true) && complete -F _systemctl systemctl systemctlWrapper sct || true
 fi
+
+#   Aliases for easy copy-pasting.
+# Source: Legend "Answer to ‘How Can I Copy the Output of a Command Directly into My Clipboard?’” Stack Overflow, February 27, 2011. https://stackoverflow.com/a/5130969/24067232.
+# Usage: 
+# - yank via piping or redirection: `cat file | yank` or `pwd | yank`
+# - put via command substitution (see Mika, D. “Answer to ‘What Does Grave Accent (`) Symbol Do in Terminal.’” Stack Overflow, March 6, 2017. https://stackoverflow.com/a/42619058/24067232):
+# ```bash
+# cd $(put)
+# # Or shorter variant:
+# cd `put`
+# # Or if have spaces in put (not sure if it works with ``):
+# cd "$(put)"
+# ```
+#   Can be further enhanced, see url below, maybe it will be better than my
+# implementation.
+# Bronosky, Bruno. “Answer to ‘How Can I Copy the Output of a Command Directly into My Clipboard?’” Stack Overflow, January 25, 2017. https://stackoverflow.com/a/41843618/24067232.
+# - Linux variants via xclip (may not be installed).
+if [[ -x "$(command -v xclip)" ]]; then
+    alias "yank=xclip -selection clipboard"
+    alias "put=xclip -o -selection clipboard"
+# - Macos variants.
+elif [[ -x "$(command -v pbcopy)" ]]; then
+    alias "yank=pbcopy"
+    if [[ -x "$(command -v pbcopy)" ]]; then
+        alias "put=pbpaste"
+    fi
+fi
+
+alias y="yank"
+alias p="put"
