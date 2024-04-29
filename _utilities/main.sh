@@ -325,3 +325,7 @@ if [[ -f ~/.bash/_utilities/bookmark.sh ]]; then
   source ~/.bash/_utilities/bookmark.sh
 fi
 
+
+if [[ -f ~/.bash/_utilities/systemctlWrapper.sh ]]; then
+  source ~/.bash/_utilities/systemctlWrapper.sh
+fi

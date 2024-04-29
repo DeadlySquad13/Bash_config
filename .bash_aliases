@@ -142,3 +142,21 @@ fi
 # Network.
 # Source: https://stackoverflow.com/a/13322549
 alias lanip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+
+# Systemctl.
+if [[ "$(command -v systemctlWrapper)" ]]; then
+    # - my wrapper
+    alias sct="systemctlWrapper"
+else
+    # - builtin
+    alias sct="systemctl"
+fi
+
+# - Add systemctl completion to my function.
+# Source: “Answer to ‘How to Make Alias to Systemctl with Autocomplete.’” Ask Ubuntu, October 22, 2021. https://askubuntu.com/a/1370852.
+if [[ -r /usr/share/bash-completion/completions/systemctl ]]; then
+  # FIX: Work ok but for some reason 'complete' is not found so it errors on
+  # last line of the script. Even though it should be
+  # bundled with bash.
+  . /usr/share/bash-completion/completions/systemctl && complete -F _systemctl systemctl systemctlWrapper sct
+fi

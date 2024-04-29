@@ -82,13 +82,6 @@ if [[ -n "$RANGER_LEVEL" ]]; then export PS1="[ranger]$PS1"; fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Alias definitions.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [[ -f ~/.bash/.bash_aliases ]]; then
-    . ~/.bash/.bash_aliases
-fi
-
 # Should be after ls aliases to apply color instead of default --auto values.
 # Uses ANSI Codes: \u001b[34m - 34 at the end stands for blue color.
 # Use `dircolors -p` to look up the file codes.
@@ -347,3 +340,10 @@ fi
 
 # TODO: Seems like it's not needed anymore, remove after 2024-06-01.
 # export NODE_OPTIONS=--openssl-legacy-provider
+
+# Alias definitions.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [[ -f ~/.bash/.bash_aliases ]]; then
+    . ~/.bash/.bash_aliases
+fi
