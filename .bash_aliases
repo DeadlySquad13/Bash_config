@@ -154,12 +154,12 @@ fi
 
 # - Add systemctl completion to my function.
 # Source: “Answer to ‘How to Make Alias to Systemctl with Autocomplete.’” Ask Ubuntu, October 22, 2021. https://askubuntu.com/a/1370852.
-if [[ -r /usr/share/bash-completion/completions/systemctl ]]; then
-  # FIX: Work ok but for some reason 'complete' is not found so it errors on
+# if [[ -r /usr/share/bash-completion/completions/systemctl ]]; then
+  # FIX: For some reason 'complete' is not found so it errors on
   # last line of the script. Even though it should be
   # bundled with bash.
-  (. /usr/share/bash-completion/completions/systemctl || true) && complete -F _systemctl systemctl systemctlWrapper sct || true
-fi
+#   (. /usr/share/bash-completion/completions/systemctl || true) && complete -F _systemctl systemctl systemctlWrapper sct || true
+# fi
 
 #   Aliases for easy copy-pasting.
 # Source: Legend "Answer to ‘How Can I Copy the Output of a Command Directly into My Clipboard?’” Stack Overflow, February 27, 2011. https://stackoverflow.com/a/5130969/24067232.
