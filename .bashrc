@@ -175,8 +175,8 @@ wrongParameters=2
 # Config.
 # * History.
 # - Directory where all history files are stored.
-mkdir -p "$HOME/.log/BashHistory"
-export HISTPATH="$HOME/.log/BashHistory";
+export HISTPATH="$HOME/.local/share/bash/history";
+mkdir -p "$HISTPATH"
 # - Saving history to file
 export PROMPT_COMMAND='\
   if [[ "$(id -u)" -ne 0 ]]; then\
