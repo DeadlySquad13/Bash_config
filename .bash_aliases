@@ -190,3 +190,9 @@ fi
 
 alias y="yank"
 alias p="put"
+
+# Broot aliases.
+if [[ -x "$(command -v broot)" ]]; then
+    # Like tongue-twisted broot du and broot.
+    alias brud="br --sizes --sort-by-size --hidden"
+fi
