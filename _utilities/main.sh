@@ -49,6 +49,23 @@ osis()
     return $(( $n ^ $? ))
 }
 
+nodeis()
+{
+    local n=0
+    if [[ "$1" = "-n" ]]; then n=1;shift; fi
+
+    # TODO: Validate.
+    # For example, @salt
+    local node="$1"
+    # Trim prefix up to @.
+    local nodename=${node#*@}
+
+    # FIX: Should be exact matches. Now it will match "alt" even if nodename
+    # is "salt". It was ok with os names but here it's misleading.
+    uname -n |grep -i "$nodename" >/dev/null
+
+    return $(( $n ^ $? ))
+}
 
 # * Config.
 config() {
