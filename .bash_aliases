@@ -178,13 +178,13 @@ fi
 # Bronosky, Bruno. “Answer to ‘How Can I Copy the Output of a Command Directly into My Clipboard?’” Stack Overflow, January 25, 2017. https://stackoverflow.com/a/41843618/24067232.
 # - Linux variants via xclip (may not be installed).
 if [[ -x "$(command -v xclip)" ]]; then
-    alias "yank=xclip -selection clipboard"
-    alias "put=xclip -o -selection clipboard"
+    alias yank="xclip -selection clipboard"
+    alias put="xclip -o -selection clipboard"
 # - Macos variants.
 elif [[ -x "$(command -v pbcopy)" ]]; then
-    alias "yank=pbcopy"
+    alias yank="pbcopy"
     if [[ -x "$(command -v pbcopy)" ]]; then
-        alias "put=pbpaste"
+        alias put="pbpaste"
     fi
 fi
 
