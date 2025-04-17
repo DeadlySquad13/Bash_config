@@ -1,6 +1,27 @@
 if [[ -x "$(command -v keychain)" ]]; then
-    # Needs password only once per login.
-    eval $(keychain --eval --quiet ${keys[@]})
+    # This method needs password only once per login.
+
+    # Just activate an agent to hook into secret manager. Without requiring any keys yet.
+    eval $(keychain --eval --quiet --noask)
+
+    # It requires to enter password manually by default. We want to only use it
+    # with secret manager if it is activated. If it is not installed then
+    # fallback to manual entry.
+    #
+    # Let A - secret manager exists,
+    # let B - secret manager is running,
+    # then:
+    #   !A || (A & B) = 1 <=>
+    #   (!A || A) & (!A || B) = 1 <=>
+    #   !A || B = 1
+    SECRET_MANAGER="keepassxc"
+    # TODO: Actually we wan't not just running manager but manager that is
+    # unlocked.
+    if ! [[ -x "$(command -v $SECRET_MANAGER)" ]] || pidof -x "$SECRET_MANAGER" > /dev/null; then
+        eval $(keychain --eval --quiet ${keys[@]})
+    else
+        echo "Run and unlock $SECRET_MANAGER to add ssh keys to agent"
+    fi
 else
     # [See](https://stackoverflow.com/a/10032655).
     eval $(ssh-agent)

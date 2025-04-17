@@ -236,8 +236,10 @@ if [[ -f ~/.bash/_utilities/main.sh ]]; then
 fi
 
 # MacOs specific settings.
-if [[ -f ~/.bash/.bash_macos ]]; then
-  . ~/.bash/.bash_macos
+if osis Darwin; then
+    if [[ -f ~/.bash/.bash_macos ]]; then
+      . ~/.bash/.bash_macos
+    fi
 fi
 
 # Authorize ssh 
