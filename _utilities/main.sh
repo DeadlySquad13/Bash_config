@@ -328,6 +328,15 @@ cdwhich() {
 
 
 # Generate gitignore.
+# @usage
+#   # Will output to stdout.
+#   gengi go
+#   # Request gitignore for a list of targets.
+#   gengi go,direnv
+#   # Overwrite .gitignore.
+#   gengi go,direnv > .gitignore
+#   # Append to existing .gitignore.
+#   gengi go,direnv >> .gitignore
 gengi() {
   curl -sL https://www.toptal.com/developers/gitignore/api/$@
 }
