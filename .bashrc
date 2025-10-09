@@ -162,9 +162,6 @@ export WIN_LOCALAPPDATA=$WIN_HOME/AppData/Local
 WORK=/mnt/e/Work
 export WORK
 
-# Default editor.
-export EDITOR="nvim"
-
 # Keybindings.
 # * Vi mode.
 set -o vi
