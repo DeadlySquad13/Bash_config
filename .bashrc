@@ -266,6 +266,7 @@ if type fzf &> /dev/null; then
     . ~/.bash/fzfCommands.sh
 fi
 
+
 # TODO: Rust env setup (breaks? nix paths)
 # source "$HOME/.cargo/env"
 
