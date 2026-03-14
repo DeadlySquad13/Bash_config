@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [[ -f ~/.bash/shared-/base.sh ]]; then
+  source ~/.bash/shared-/base.sh
+fi
+if [[ -f ~/.bash/shared-/logging.sh ]]; then
+  source ~/.bash/shared-/logging.sh
+fi
+
+
 # General.
 # * Errors.
 echoerr() {
@@ -223,7 +231,7 @@ printColors() {
 }
 
 isWsl() {
-  if [[ -n "$IS_WSL" || -n "$WSL_DISTRO_NAME" ]]; then
+  if [[ -n "${IS_WSL-}" || -n "${WSL_DISTRO_NAME-}" ]]; then
     return 0
   else
     return 1

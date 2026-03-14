@@ -295,3 +295,10 @@ fi
 if [[ -f ~/.bash/.bash_aliases ]]; then
     . ~/.bash/.bash_aliases
 fi
+
+# FIX: Had to unset restricted mode for two reasons:
+# 1. '-bash: COMP_WORDS[0]: unbound variable' when auto-completing with empty
+# query.
+# 2. '[FATAL] /home/ds13/.bashrc:865 () 1' - seems related to some of the Nix
+# Bash modules.
+unsetRestrictedMode
