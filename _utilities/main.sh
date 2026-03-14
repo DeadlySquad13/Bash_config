@@ -366,3 +366,7 @@ fi
 if [[ -f ~/.bash/_utilities/systemctlWrapper.sh ]]; then
   source ~/.bash/_utilities/systemctlWrapper.sh
 fi
+
+if [[ -f ~/.bash/_utilities/dockerWrapper.sh ]]; then
+  source ~/.bash/_utilities/dockerWrapper.sh
+fi
